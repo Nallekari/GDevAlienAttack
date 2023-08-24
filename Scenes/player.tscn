@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c58ogdxws4w63"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_f54ew"]
+[ext_resource type="Texture2D" uid="uid://32vlu4bip5dp" path="res://Assets/alien_attack_assets/textures/player_ship.png" id="1_ge03o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pwaf2"]
+radius = 144.0
+height = 474.0
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_f54ew")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_ge03o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7, -6)
+shape = SubResource("CapsuleShape2D_pwaf2")

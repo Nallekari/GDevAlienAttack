@@ -1,14 +1,53 @@
-[gd_scene load_steps=4 format=3 uid="uid://c58ogdxws4w63"]
+[gd_scene load_steps=10 format=3 uid="uid://c58ogdxws4w63"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_f54ew"]
 [ext_resource type="Texture2D" uid="uid://32vlu4bip5dp" path="res://Assets/alien_attack_assets/textures/player_ship.png" id="1_ge03o"]
+[ext_resource type="AudioStream" uid="uid://dqhy4h7oiihtu" path="res://Assets/alien_attack_assets/audio/sfx_laser2.wav" id="3_08d48"]
+
+[sub_resource type="Gradient" id="Gradient_agauo"]
+offsets = PackedFloat32Array(0, 0.511111, 1)
+colors = PackedColorArray(1, 1, 0, 0.172549, 0.905882, 0.564706, 0, 1, 0.819608, 0.145098, 0, 0.164706)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7yp7g"]
+gradient = SubResource("Gradient_agauo")
+
+[sub_resource type="Curve" id="Curve_f8c0l"]
+_data = [Vector2(0.0301205, 0.557895), 0.0, 0.0, 0, 0, Vector2(0.536145, 0.694737), 0.0, 0.0, 0, 0, Vector2(1, 0.989474), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_q454s"]
+curve = SubResource("Curve_f8c0l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ffnuq"]
+lifetime_randomness = 0.3
+emission_shape = 3
+emission_box_extents = Vector3(1, 24, 1)
+particle_flag_disable_z = true
+spread = 26.05
+gravity = Vector3(-90, 0, 0)
+initial_velocity_min = -200.0
+initial_velocity_max = -200.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 2.0
+scale_max = 12.53
+scale_curve = SubResource("CurveTexture_q454s")
+color = Color(1, 0.784314, 0, 1)
+color_ramp = SubResource("GradientTexture1D_7yp7g")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pwaf2"]
 radius = 34.0
 height = 90.0
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 2
 script = ExtResource("1_f54ew")
+
+[node name="FlameParticleEffect" type="GPUParticles2D" parent="."]
+position = Vector2(-34, 0)
+amount = 131
+process_material = SubResource("ParticleProcessMaterial_ffnuq")
+lifetime = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
@@ -20,3 +59,6 @@ position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_pwaf2")
 
 [node name="RocketContainer" type="Node" parent="."]
+
+[node name="RocketShotSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_08d48")

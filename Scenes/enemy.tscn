@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bj46gfri5tnid"]
+
+[ext_resource type="Texture2D" uid="uid://dffehkftve8ho" path="res://Assets/alien_attack_assets/textures/enemy_ship.png" id="1_kivoc"]
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_m82vl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q5ef0"]
+radius = 35.0
+height = 162.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_27mx8"]
+radius = 19.0
+height = 96.0
+
+[node name="Enemy" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_m82vl")
+speed = 200
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_kivoc")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_q5ef0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(12, -1)
+shape = SubResource("CapsuleShape2D_27mx8")
